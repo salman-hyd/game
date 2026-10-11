@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#0b1026" />
+<meta name="description" content="Subway Dash - endless runner with power-ups and skins." />
+<title>Subway Dash — Endless Runner</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="wrap">
+  <canvas id="game"></canvas>
+
+  <div id="hud">
+    <div class="stat"><span class="lbl">SCORE</span><span class="val" id="uiScore">0</span></div>
+    <div class="group">
+      <div class="stat"><span class="lbl">COINS</span><span class="val" id="uiCoins">0</span></div>
+      <div class="stat"><span class="lbl">BEST</span><span class="val" id="uiBest">0</span></div>
+    </div>
+  </div>
+
+  <div id="powerBar">
+    <div class="pw" id="pwMagnet"><span class="pwIcon">🧲</span><span class="pwBar"><i></i></span></div>
+    <div class="pw" id="pwJet"><span class="pwIcon">🚀</span><span class="pwBar"><i></i></span></div>
+    <div class="pw" id="pwShield"><span class="pwIcon">🛡️</span><span class="pwBar"><i></i></span></div>
+  </div>
+
+  <button id="muteBtn" aria-label="Mute">🔊</button>
+
+  <div id="touchControls" class="hidden">
+    <div class="tc-left">
+      <button class="tc-btn" data-act="left" aria-label="Left">◀</button>
+      <button class="tc-btn" data-act="right" aria-label="Right">▶</button>
+    </div>
+    <div class="tc-right">
+      <button class="tc-btn" data-act="jump" aria-label="Jump">▲</button>
+      <button class="tc-btn" data-act="slide" aria-label="Slide">▼</button>
+    </div>
+  </div>
+
+  <div id="overlay" class="show">
+    <!-- MAIN MENU -->
+    <div class="panel" id="menuPanel">
+      <h1>SUBWAY DASH</h1>
+      <p>Dodge the trains. Grab the coins. Don't stop.</p>
+      <div class="bestLine">BEST <b id="menuBest">0</b> · COINS <b id="menuCoins">0</b></div>
+      <div class="keys">
+        <span class="key">← → / A D</span>
+        <span class="key">↑ / W / Space</span>
+        <span class="key">↓ / S</span>
+        <span class="key">Swipe / Buttons</span>
+      </div>
+      <div class="buttons">
+        <button id="startBtn">PLAY</button>
+        <button id="skinsBtn" class="secondary">SKINS</button>
+      </div>
+    </div>
+
+    <!-- SKINS -->
+    <div class="panel hidden" id="skinsPanel">
+      <h1>SKINS</h1>
+      <p>Earn coins to unlock more runners.</p>
+      <div class="skinGrid" id="skinGrid"></div>
+      <div class="buttons">
+        <button id="skinsBack" class="secondary">BACK</button>
+      </div>
+    </div>
+
+    <!-- GAME OVER -->
+    <div class="panel hidden" id="overPanel">
+      <h1>GAME OVER</h1>
+      <div class="overStats">
+        <div>SCORE <b id="ovScore">0</b></div>
+        <div>COINS <b id="ovCoins">0</b></div>
+        <div>BEST <b id="ovBest">0</b></div>
+      </div>
+      <div id="newRecord" class="newRecord hidden">✦ NEW RECORD ✦</div>
+      <div class="buttons">
+        <button id="retryBtn">RETRY</button>
+        <button id="homeBtn" class="secondary">MENU</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="game.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>
